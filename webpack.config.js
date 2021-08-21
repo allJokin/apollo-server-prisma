@@ -47,7 +47,7 @@ const config = {
   },
   target: "node",
   devtool: "inline-source-map",
-  externals: [{ _http_common: "commonjs2 _http_common" }],
+  externals: [{ _http_common: "commonjs2 _http_common" }, "encoding"],
 };
 
 module.exports = () => {
