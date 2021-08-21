@@ -14,8 +14,8 @@ services:
 
     volumes:
       - ..:/workspace:cached
-      - node_modules_volume:/workspace/node_modules:z
-      - build_volume:/workspace/build:z
+      - node_modules_volume:/workspace/node_modules
+      - build_volume:/workspace/build
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

@@ -1,5 +1,5 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
-
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 const isProduction = process.env.NODE_ENV == "production";
@@ -12,6 +12,12 @@ const config = {
   plugins: [
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+    new CopyWebpackPlugin({
+      patterns: [
+        "node_modules/.prisma/client/query-engine-debian-openssl-1.1.x",
+        "node_modules/.prisma/client/schema.prisma",
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -41,6 +47,7 @@ const config = {
   },
   target: "node",
   devtool: "inline-source-map",
+  externals: [{ _http_common: "commonjs2 _http_common" }],
 };
 
 module.exports = () => {
