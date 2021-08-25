@@ -1,17 +1,22 @@
 import { ApolloServer } from "apollo-server";
-import typeDefs from "./graphql/schema.graphql";
-import { resolvers } from "./resolvers";
-import DBDataSource from "./datasource/db-datasource";
-import dotenv from "dotenv";
+import schema from "./schema";
+import { PrismaClient } from "@prisma/client";
+import * as dotenv from "dotenv";
+import { $settings } from "nexus-prisma";
 dotenv.config();
 
 // サーバーの起動
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  dataSources: () => ({ db: new DBDataSource() }),
+  schema,
+  context: () => ({
+    db: new PrismaClient(),
+  }),
 });
 
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
+});
+
+$settings({
+  prismaClientContextField: "db", // <-- Tell Nexus Prisma
 });

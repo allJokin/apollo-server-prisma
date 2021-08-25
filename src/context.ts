@@ -1,7 +1,6 @@
 import DBDataSource from "./datasource/db-datasource";
+import { PrismaClient } from "@prisma/client";
 
 export type Context = {
-  dataSources: {
-    db: DBDataSource;
-  };
+  db: PrismaClient;
 };
